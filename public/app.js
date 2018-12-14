@@ -1,0 +1,24 @@
+const express = require(`express`)
+const app = express()
+
+app.set('view engine', 'html');
+app.use(express.urlencoded({
+    extended: false
+}))
+app.use(express.json())
+app.use(express.static(__dirname));
+
+//MAIN ROUTE
+app.get('/', (req, res) => {
+    res.render(`dashboard.ejs`)
+});
+
+app.get('/tables', (req, res) => {
+    res.render(`tables.ejs`)
+});
+
+app.listen(3000, () => {
+    console.log(__dirname);
+
+    console.log('App listening on port 3000!');
+});
