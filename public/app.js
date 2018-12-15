@@ -1,5 +1,7 @@
 const express = require(`express`)
+const middlewareLogin = require(`./middlewares/logincheck`)
 const app = express()
+
 
 app.set('view engine', 'html');
 app.use(express.urlencoded({
@@ -9,8 +11,11 @@ app.use(express.json())
 app.use(express.static(__dirname));
 
 //MAIN ROUTE
-app.get('/', (req, res) => {
+app.get('/',middlewareLogin, (req, res) => {
     res.render(`dashboard.ejs`)
+});
+app.get('/login', (req, res) => {
+    res.render(`login.ejs`)
 });
 
 app.get('/tables', (req, res) => {
